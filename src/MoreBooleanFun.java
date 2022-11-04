@@ -1,48 +1,54 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MoreBooleanFun {
-    public static void main(String[] args) {
-        int myAge;
-        int nextAge;
 
-        Scanner userInput = new Scanner(System.in);
-        System.out.print("Enter your age: ");
-        myAge = userInput.nextInt();
-
-        System.out.println("Current age: " + myAge);
-
-        //convert these into something more complete using if statements
-        //System.out.println("Can rent a car: " + (myAge >= 25));
-        //System.out.println("Gets a senior discount: "+ (myAge >= 65));
-        //System.out.println("Can order from children's menu: " + (myAge <=12));
-
-        if(myAge >= 25){
-            System.out.println("You can rent a car!");
-        }
-        if(myAge < 25){
-            System.out.println("You cannot rent a car :( ");
+    public static int hops = 0;
+    public static int[] board;
+    public static void main(String... args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), s = sc.nextInt() - 1,m = sc.nextInt();
+        board = new int[n];
+        for(int i = 0;i < n;i++) {
+            board[i] = sc.nextInt();
         }
 
-        if (myAge >= 65) {
-            System.out.println("You get a senior discount!");
-        }
-        if(myAge < 65){
-            System.out.println("Sorry, you are too young for a discount :( ");
-        }
+        ArrayList<Integer> map = new ArrayList<>();
 
-        if(myAge <= 12){
-            System.out.println("You can order from the kids menu!");
-        }
-        if(myAge > 12){
-            System.out.println("Sorry, you are too old for the kids menu :( ");
+        //Base state
+        if(board[s] == m) {
+            ending("magic");
         }
 
-        nextAge = myAge + 1;
+        while(!map.contains(s)) {
+            hops++;
+            map.add(s);
+            s += board[s];
+            if(s >= n) {
+                ending("right");
+            }
 
-        System.out.println("On your next birthday out you will be: " + nextAge); //complete this code, don't do math in sout
 
-        //further modification: prompt user for input and then print what they are able to do based on their age
-        //and print their age on their next birthday
+        }
+
+
 
     }
+
+    public static void ending(String in) {
+        if(in.equals("magic")) {
+            System.out.println("magic");
+
+        } else if(in.equals("left")) {
+            System.out.println("left");
+        } else if(in.equals("right")) {
+            System.out.println("right");
+        } else {
+            System.out.println("cycle");
+        }
+
+        System.out.println(hops);
+        System.exit(0);
+    }
+
 }
