@@ -12,19 +12,25 @@ public class MoreBooleanFun {
         for(int i = 0;i < n;i++) {
             board[i] = sc.nextInt();
         }
+        sc.close();
 
         ArrayList<Integer> map = new ArrayList<>();
 
         //Base state
 
 
+
+
         while(!map.contains(s)) {
-            if(s >= 0 && board[s] == m) {
+            if( board[s] == m) {
                 ending("magic");
             }
             hops++;
             map.add(s);
-            s += board[s];
+
+             {
+                s += board[s];
+            }
             if(s >= n) {
                 ending("right");
             }
@@ -43,12 +49,12 @@ public class MoreBooleanFun {
 
     }
 
-    public static void ending(String in) {
-        switch (in) {
-            case "magic" -> System.out.println("magic");
-            case "left" -> System.out.println("left");
-            case "right" -> System.out.println("right");
-            default -> System.out.println("cycle");
+    public static void ending(String endingType) {
+        switch (endingType) {
+            case "magic" : System.out.println("magic");break;
+            case "left" : System.out.println("left");break;
+            case "right" : System.out.println("right");break;
+            default : System.out.println("cycle");break;
         }
 
         System.out.println(hops);
