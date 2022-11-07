@@ -16,35 +16,39 @@ public class MoreBooleanFun {
         ArrayList<Integer> map = new ArrayList<>();
 
         //Base state
-        if(board[s] == m) {
-            ending("magic");
-        }
+
 
         while(!map.contains(s)) {
+            if(s >= 0 && board[s] == m) {
+                ending("magic");
+            }
             hops++;
             map.add(s);
             s += board[s];
             if(s >= n) {
                 ending("right");
             }
+            if(s <= 0) {
+                ending("left");
+
+            }
+
 
 
         }
+
+        ending("cycle");
 
 
 
     }
 
     public static void ending(String in) {
-        if(in.equals("magic")) {
-            System.out.println("magic");
-
-        } else if(in.equals("left")) {
-            System.out.println("left");
-        } else if(in.equals("right")) {
-            System.out.println("right");
-        } else {
-            System.out.println("cycle");
+        switch (in) {
+            case "magic" -> System.out.println("magic");
+            case "left" -> System.out.println("left");
+            case "right" -> System.out.println("right");
+            default -> System.out.println("cycle");
         }
 
         System.out.println(hops);
